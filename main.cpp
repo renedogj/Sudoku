@@ -8,29 +8,7 @@ using namespace std;
 constexpr int sudokuSize = 9;
 
 int sudoku[9][9];
-/*int sudoku[9][9] = {
-    {0, 0, 2, 0, 5, 0, 0, 0, 0},
-    {0, 0, 4, 0, 0, 0, 6, 0, 7},
-    {0, 8, 6, 0, 0, 0, 0, 0, 2},
-    {0, 4, 0, 0, 0, 0, 0, 0, 0},
-    {6, 9, 3, 0, 0, 0, 7, 4, 8},
-    {2, 0, 8, 0, 7, 0, 0, 3, 9},
-    {3, 2, 0, 4, 0, 0, 9, 0, 5},
-    {0, 0, 9, 7, 2, 0, 0, 0, 0},
-    {0, 0, 5, 0, 0, 3, 4, 0, 0}
-};*/
-
-/*int sudoku[9][9] = {
-    {5, 3, 0, 0, 7, 0, 0, 0, 0},
-    {6, 0, 0, 1, 9, 5, 0, 0, 0},
-    {0, 9, 8, 0, 0, 0, 0, 6, 0},
-    {8, 0, 0, 0, 6, 0, 0, 0, 3},
-    {4, 0, 0, 8, 0, 3, 0, 0, 1},
-    {7, 0, 0, 0, 2, 0, 0, 0, 6},
-    {0, 6, 0, 0, 0, 0, 2, 8, 0},
-    {0, 0, 0, 4, 1, 9, 0, 0, 5},
-    {0, 0, 0, 0, 8, 0, 0, 7, 9}
-};*/
+int unSolveSudoku[9][9];
 
 void printSudoku(int sudoku[9][9], const bool isSolve = false) {
     // Print the top line
@@ -72,10 +50,15 @@ int main() {
 
     while(!validSudoku) {
         generateSudoku(28, sudoku);
-        cout << "\033[1A";
+        cout << "\033[2A";
         cout << "Generando nuevo sudoku... " << endl;
         printSudoku(sudoku);
 
+        for (int i = 0; i < 9; ++i) {
+            for (int j = 0; j < 9; ++j) {
+                unSolveSudoku[i][j] = sudoku[i][j];
+            }
+        }
         solveSudoku(sudoku, 0);
 
         validSudoku = Valid(sudoku);
@@ -86,7 +69,10 @@ int main() {
     const chrono::duration<double, milli> float_ms = end - start;
     cout << "La ejecucion a durado " << float_ms.count() << " millisegundos" << endl;
     cout << "Nuevo sudoku encontrado: " << endl;
+    printSudoku(unSolveSudoku, true);
+    cout << "Solucion: " << endl;
     printSudoku(sudoku, true);
+
 
     return 0;
 }
