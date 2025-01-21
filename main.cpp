@@ -67,21 +67,27 @@ void printSudoku(int sudoku[9][9], const bool isSolve = false) {
 }
 
 int main() {
-    generateSudoku(25, sudoku);
-    printSudoku(sudoku, true);
-    /*const auto start = chrono::high_resolution_clock::now();
+    const auto start = chrono::high_resolution_clock::now();
+    bool validSudoku = false;
 
-    solveSudoku(sudoku, 0);
-    printSudoku(sudoku, true);
-    if(Valid(sudoku)) {
-        cout << "Sudoku resuelto" << endl;
-    }else {
-        cout << "Sudoku no resuelto" << endl;
+    while(!validSudoku) {
+        generateSudoku(28, sudoku);
+        cout << "\033[1A";
+        cout << "Generando nuevo sudoku... " << endl;
+        printSudoku(sudoku);
+
+        solveSudoku(sudoku, 0);
+
+        validSudoku = Valid(sudoku);
     }
+
+    cout << "\033[2A";
     const auto end = chrono::high_resolution_clock::now();
     const chrono::duration<double, milli> float_ms = end - start;
+    cout << "La ejecucion a durado " << float_ms.count() << " millisegundos" << endl;
+    cout << "Nuevo sudoku encontrado: " << endl;
+    printSudoku(sudoku, true);
 
-    cout << "La ejecucion a durado " << float_ms.count() << " millisegundos" << endl;*/
     return 0;
 }
 

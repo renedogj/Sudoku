@@ -1,5 +1,5 @@
 //
-// Created by rened on 07/11/2024.
+// Created by renedogj on 07/11/2024.
 //
 #include <algorithm>
 #include <iterator>
@@ -56,19 +56,17 @@ bool Valid(int grid[9][9]) {
     int *rowCheck, *columnCheck, *blockCheck;
 
     // For every cell in the grid
-    for(int i = 0; i < 81; i++)
-    {
+    for(int i = 0; i < 81; i++) {
         // This means we can check if so far a grid is valid since blank cells are assigned 0
         if(grid1d[i] == 0)
-            continue;
+            return false;
 
         row = i / 9;
         column = i % 9;
         blockStart = row / 3 * 27 +  column / 3 * 3;
 
         // Iterate through 10 indexes
-        for(int j = 0; j < 9; j++)
-        {
+        for(int j = 0; j < 9; j++) {
             // Check if the row contains the number
             rowCheck = grid1d + row * 9 + j;
             if(grid1d[i] == *rowCheck && (grid1d + i) != rowCheck)

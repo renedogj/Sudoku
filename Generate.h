@@ -1,5 +1,5 @@
 //
-// Created by rened on 07/11/2024.
+// Created by renedogj on 07/11/2024.
 //
 
 #ifndef GENERATE_H
